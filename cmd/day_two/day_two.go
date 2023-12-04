@@ -15,9 +15,7 @@ func main() {
 		line := scanner.Text()
 		game := daytwo.ParseGame(line)
 
-		if game.IsValid() {
-			sum += game.Id
-		}
+		sum += game.GetPower()
 	}
 
 	println(sum)

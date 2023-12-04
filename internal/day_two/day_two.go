@@ -39,6 +39,31 @@ func (self Game) IsValid() bool {
 	return true
 }
 
+func (self Game) GetPower() int {
+	fewestNumberOfCubes := Round{}
+
+	for _, round := range self.rounds {
+		for color, numberOfCubes := range round {
+			currentNumberOfCubes, found := fewestNumberOfCubes[color]
+
+			if !found || numberOfCubes > currentNumberOfCubes {
+				fewestNumberOfCubes[color] = numberOfCubes
+			}
+		}
+	}
+
+	return getPowerOfRound(fewestNumberOfCubes)
+}
+
+func getPowerOfRound(round Round) int {
+	power := 1
+	for _, numberOfCubes := range round {
+		power *= numberOfCubes
+	}
+
+	return power
+}
+
 // parseRound returns a Round which is a map of colors (red, green or blue) and the number of.
 func parseRound(round string) Round {
 	subsets := strings.Split(strings.TrimSpace(round), ",")
