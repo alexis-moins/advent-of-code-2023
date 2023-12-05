@@ -9,3 +9,9 @@ day-two:
 
 test-day-two:
     @go test ./test/day_two -v
+
+day-three:
+    @go run cmd/day_three/day_three.go
+
+test-day-three:
+    @-go test ./test/day_three -v

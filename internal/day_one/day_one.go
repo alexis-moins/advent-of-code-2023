@@ -33,7 +33,7 @@ func GetNumberInLine(line string) int {
 			for key, value := range stringToRune {
 				if strings.HasSuffix(letters, key) {
 					digits = append(digits, value)
-					letters = ""
+					letters = string(char)
 
 					break
 				}
