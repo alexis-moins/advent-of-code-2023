@@ -93,7 +93,13 @@ func (self EngineSchematic) GetEngineParts() []int {
 				self.index = x
 			} else if self.mustParseDigit(char, x, line) {
 				if self.IsEnginePart(x, y) {
-					toConvert := self.grid[y][self.index:x]
+                    var toConvert string
+
+                    if unicode.IsDigit(char) && self.isLastCharacterOfLine(x, line) {
+                        toConvert = self.grid[y][self.index:]
+                    } else {
+                        toConvert = self.grid[y][self.index:x]
+                    }
 					fmt.Printf("number: %v\n", toConvert)
 
 					number, err := strconv.Atoi(toConvert)
