@@ -11,13 +11,19 @@ func main() {
 	file, scanner := utils.GetInput("day_three")
 	defer file.Close()
 
-	schematic := daythree.ParseEngineSchematic(scanner)
-	engineParts := schematic.GetEngineParts()
+    engine := daythree.ParseEngineSchematic(scanner)
 
-	sum := 0
-	for _, enginePart := range engineParts {
-		sum += enginePart
-	}
+    sum := 0
+
+    for _, position := range engine.PotentialGears {
+        parts := engine.FindAdjacentEngineParts(position)
+
+        fmt.Printf("parts: %v\n", parts)
+
+        if len(parts) == 2 {
+            sum += parts[0] * parts[1]
+        }
+    }
 
 	fmt.Printf("sum: %v\n", sum)
 }
